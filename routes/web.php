@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/*
+Route::any('{any}', function(){
+    return response()->json([
+    	'status' => 'error',
+        'message' => 'Resource not found!'], 404);
+})->where('any', '.*');
+
+
+Route::fallback(function(){
+    return response()->json([
+    	'status' => 'error',
+        'message' => 'Resource not found'], 404);
+});
+*/
