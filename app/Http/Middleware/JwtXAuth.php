@@ -6,6 +6,7 @@ use JWTAuth;
 use Exception;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
+
 class JwtXAuth extends BaseMiddleware
 {
 
@@ -19,11 +20,11 @@ class JwtXAuth extends BaseMiddleware
 	public function handle($request, Closure $next)
 	{
 		$payload = JWTAuth::payload();
-		
+
 		if ( $payload->get('xtype') != 'auth' ){
 			return response()->json(['status' => 'Token Misused'], 406);
 		}
-		
-        return $next($request);
+
+		return $next($request);
 	}
 }

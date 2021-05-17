@@ -6,6 +6,8 @@ use JWTAuth;
 use Exception;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
+use App\Models\Token;
+
 class JwtMiddleware extends BaseMiddleware
 {
 
@@ -31,6 +33,14 @@ class JwtMiddleware extends BaseMiddleware
 				return response()->json(['status' => 'Authorization Token not found'], 404);
 			}
 		}
-            return $next($request);
+
+		$token_obj = Token::findByValue( auth()->getToken()->get() );
+
+		if ( !$token_obj ){
+			//OUR APP DID NOT ISSUED THIS TOKEN, POSSIBLE SECURITY BREACH
+			return response()->json(['status' => 'Token Invalid - bad issuer'], 403);
+		}
+
+		return $next($request);
 	}
 }
