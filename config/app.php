@@ -227,6 +227,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'JwtApi' => App\Helpers\JwtApi::class, //Helper we added
+
     ],
 
 ];
